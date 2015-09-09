@@ -303,10 +303,12 @@
     "Delete": function(cm) { killRegion(cm) || killTo(cm, byChar, 1); },
     "Ctrl-H": function(cm) { killTo(cm, byChar, -1); },
     "Backspace": function(cm) { killRegion(cm) || killTo(cm, byChar, -1); },
+    "Ctrl-.": function(cm) { killRegion(cm) || killTo(cm, byChar, -1); },
 
     "Alt-F": move(byWord, 1), "Alt-B": move(byWord, -1),
     "Alt-D": function(cm) { killTo(cm, byWord, 1); },
     "Alt-Backspace": function(cm) { killTo(cm, byWord, -1); },
+    "Alt-.": function(cm) { killTo(cm, byWord, -1); },
 
     "Ctrl-N": move(byLine, 1), "Ctrl-P": move(byLine, -1),
     "Down": move(byLine, 1), "Up": move(byLine, -1),
@@ -362,11 +364,11 @@
       operateOnWord(cm, function(w) { return w.toLowerCase(); });
     }),
 
-    "Alt-;": "toggleComment",
+    "Alt-;": "toggleComment", "Alt-Shift-,": "toggleComment",
 
     "Ctrl-/": repeated("undo"), "Shift-Ctrl--": repeated("undo"),
     "Ctrl-Z": repeated("undo"), "Cmd-Z": repeated("undo"),
-    "Shift-Alt-,": "goDocStart", "Shift-Alt-.": "goDocEnd",
+    "Shift-Alt-0": "goDocStart", "Shift-Alt-.": "goDocEnd",
     "Ctrl-S": "findNext", "Ctrl-R": "findPrev", "Ctrl-G": quit, "Shift-Alt-5": "replace",
     "Alt-/": "autocomplete",
     "Ctrl-J": "newlineAndIndent", "Enter": false, "Tab": "indentAuto",
@@ -385,6 +387,7 @@
     "Ctrl-X Tab": function(cm) {
       cm.indentSelection(getPrefix(cm, true) || cm.getOption("indentUnit"));
     },
+
     "Ctrl-X Ctrl-X": function(cm) {
       cm.setSelection(cm.getCursor("head"), cm.getCursor("anchor"));
     },
